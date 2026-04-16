@@ -28,27 +28,39 @@ def play_game():
     guess_letters = []
     max_mistakes = len(STAGES) - 1
     while True:
-        print(display_game_state(mistakes, secret_word, guess_letters))
-        guess = input("Guess a letter: ").lower()
-        print("You guessed:", guess)
+        try:
+            print(display_game_state(mistakes, secret_word, guess_letters))
+            guess = input("Guess a letter: ").lower()
+            print("You guessed:", guess)
+            if guess.isalpha():
+                if guess in guess_letters:
+                    print("You already guessed that letter.")
+                    continue
 
-        if guess in guess_letters:
-            print("You already guessed that letter.")
-            continue
+                guess_letters.append(guess)
 
-        guess_letters.append(guess)
+                if len(guess)>1:
+                    raise ValueError("only a single alphabetical character is accepted")
 
-        if guess not in secret_word:
-            mistakes += 1
+                if guess in secret_word:
+                    print("Correct!")
 
-        if all(letter in guess_letters for letter in secret_word):
-            print(f"Congratulations, you saved the snowman!")
-            break
+                if guess not in secret_word:
+                    print("Wrong!")
+                    mistakes += 1
 
-        if mistakes >= max_mistakes:
-            print(STAGES[mistakes])
-            print(f"Game Over! The word was {secret_word}")
-            break
+                if all(letter in guess_letters for letter in secret_word):
+                    print(f"Congratulations, you saved the snowman!")
+                    break
+
+                if mistakes >= max_mistakes:
+                    print(STAGES[mistakes])
+                    print(f"Game Over! The word was {secret_word}")
+                    break
+            else:
+                raise ValueError("Only alphabets char are allowed")
+        except ValueError as e:
+            print(e)
 
 
 if __name__ == "__main__":
