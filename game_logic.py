@@ -2,16 +2,34 @@ import random
 
 from ascii_art import STAGES
 
-# List of secret words
 WORDS = ["python", "git", "github", "snowman", "meltdown"]
 
 
 def get_random_word():
-    """Selects a random word from the list."""
+    """
+    Select a random word from the predefined WORDS list.
+
+    Returns:
+        str: A randomly selected word.
+    """
     return WORDS[random.randint(0, len(WORDS) - 1)]
 
 
 def display_game_state(mistakes, secret_word, guessed_letters):
+    """
+        Display the current game stage and return the formatted word progress.
+
+        Args:
+            mistakes (int): The number of incorrect guesses made so far.
+            secret_word (str): The word the player is trying to guess.
+            guessed_letters (list[str]): Letters that have already been
+            guessed.
+
+        Returns:
+            str: A string representing the current progress of the word,
+                 with guessed letters revealed and unguessed letters as
+                 underscores.
+    """
     print(STAGES[mistakes])
     display_word = ""
     for letter in secret_word:
@@ -23,6 +41,20 @@ def display_game_state(mistakes, secret_word, guessed_letters):
 
 
 def play_game():
+    """
+        Run a single session of the Snowman Meltdown game.
+
+        The function handles:
+        - Selecting a random word
+        - Processing user input
+        - Tracking guesses and mistakes
+        - Determining win/loss conditions
+
+        Raises:
+            ValueError: If the user inputs invalid data such as
+            non-alphabetical
+                        characters or more than one character at a time.
+    """
     secret_word = get_random_word()
     print("Welcome to Snowman Meltdown!")
 
@@ -64,6 +96,17 @@ def play_game():
 
 
 def main():
+    """
+        Entry point for the Snowman Meltdown game.
+
+        Handles:
+        - Starting the game
+        - Asking the user if they want to replay
+        - Catching and displaying input-related errors
+
+        Raises:
+            ValueError: If the replay input is not 'y' or 'n'.
+    """
     try:
         play_game()
         reply_option = input("Want to play again (y/n): ")
