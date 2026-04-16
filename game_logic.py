@@ -73,7 +73,7 @@ def play_game():
             guess_letters.append(guess)
 
             if len(guess) > 1:
-                raise ValueError(
+                print(
                     "only a single alphabetical character is accepted")
 
             if guess in secret_word:
@@ -91,8 +91,10 @@ def play_game():
                 print(STAGES[mistakes])
                 print(f"Game Over! The word was {secret_word}")
                 break
+        elif guess == "":
+            print("Provide a word")
         else:
-            raise ValueError("Only alphabets char are allowed")
+            print("Only alphabets char are allowed")
 
 
 def main():
@@ -107,17 +109,21 @@ def main():
         Raises:
             ValueError: If the replay input is not 'y' or 'n'.
     """
-    try:
-        play_game()
-        reply_option = input("Want to play again (y/n): ")
-        if reply_option.lower() == "y":
-            play_game()
-        elif reply_option.lower() == "n":
-            print("Goodbye! Hope you had fun.")
-        else:
-            raise ValueError("Please type (y) or (n)")
-    except ValueError as e:
-        print(e)
+
+    play_game()
+    while True:
+        try:
+            reply_option = input("Want to play again (y/n): ")
+            if reply_option.lower() == "y":
+                play_game()
+                continue
+            elif reply_option.lower() == "n":
+                print("Goodbye! Hope you had fun.")
+                break
+            else:
+                raise ValueError("Please type (y) or (n)")
+        except ValueError as e:
+            print(e)
 
 
 if __name__ == "__main__":
