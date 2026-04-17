@@ -73,7 +73,8 @@ def play_game():
 
             if len(guess) > 1:
                 print(
-                    "only a single alphabetical character is accepted")
+                    "only one alphabetical character is accepted")
+                continue
 
             if guess in secret_word:
                 print("Correct!")
