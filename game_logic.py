@@ -11,7 +11,7 @@ def get_random_word():
     Returns:
         str: A randomly selected word.
     """
-    return WORDS[random.randint(0, len(WORDS) - 1)]
+    return random.choice(WORDS)
 
 
 def display_game_state(mistakes, secret_word, guessed_letters):
@@ -84,7 +84,8 @@ def play_game():
                 mistakes += 1
 
             if all(letter in guess_letters for letter in secret_word):
-                print(f"Congratulations, you saved the snowman!")
+                print(f"Congratulations, you saved the snowman!, \n"
+                      f"The word is {secret_word}")
                 break
 
             if mistakes >= max_mistakes:

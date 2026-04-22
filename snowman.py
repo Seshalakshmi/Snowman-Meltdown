@@ -15,18 +15,15 @@ def main():
 
     play_game()
     while True:
-        try:
-            reply_option = input("Want to play again (y/n): ")
-            if reply_option.lower() == "y":
-                play_game()
-                continue
-            elif reply_option.lower() == "n":
-                print("Goodbye! Hope you had fun.")
-                break
-            else:
-                raise ValueError("Please type (y) or (n)")
-        except ValueError as e:
-            print(e)
+        reply_option = input("Want to play again (y/n): ")
+        if reply_option.lower() == "y":
+            play_game()
+            continue
+        elif reply_option.lower() == "n":
+            print("Goodbye! Hope you had fun.")
+            break
+        else:
+            print("Please type (y) or (n)")
 
 
 if __name__ == "__main__":
